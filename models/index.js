@@ -5,8 +5,8 @@ const {User} = require('./User')
 
 User.hasMany(Board)
 Board.belongsTo(User)
-Cheese.belongsToMany(Board, {through: 'Board-Cheese', as: 'Mixed_cheese'})
-Board.belongsToMany(Cheese,{through: 'Board-Cheese', as: 'Mixed_cheese'})
+Cheese.belongsToMany(Board, {through: 'Board-Cheese'})
+Board.belongsToMany(Cheese,{through: 'Board-Cheese'})
 
 
 

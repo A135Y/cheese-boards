@@ -148,9 +148,10 @@ describe('A Board can have many cheeses and a cheese can be on many boards', () 
         await softCheeseBoard.addCheese(mozzarella)
         await softCheeseBoard.addCheese(brie)
         await softCheeseBoard.addCheese(creamCheese)
-         // await mixCheeseBoard.addCheese(mozzarella)
-        //    await mixCheeseBoard.addCheese() use through
-       //     await mixCheeseBoard.addCheese(brie)   {through: 'Board-cheese'}
+        await mixCheeseBoard.addCheese(mozzarella)
+        await mixCheeseBoard.addCheese(brie)
+        await mixCheeseBoard.addCheese(parmesan)
+
 
         const getHardCheeses = await hardCheeseBoard.getCheeses()
         const getSoftCheeses = await softCheeseBoard.getCheeses()
@@ -162,6 +163,8 @@ describe('A Board can have many cheeses and a cheese can be on many boards', () 
         expect (getSoftCheeses[0].title).toEqual(mozzarella.title)
         expect (getSoftCheeses[0].title).toEqual(mozzarella.title)
         expect(getSoftCheeses[2].description).toEqual(creamCheese.description)
+        expect(getMixCheeses[0].title).toEqual(mozzarella.title)
+        expect(getMixCheeses[1].description).toEqual
 
     })
 
