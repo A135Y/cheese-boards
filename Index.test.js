@@ -64,16 +64,25 @@ describe('User can have many boards', () => {
             rating: 5.8
         })
 
+        const mixCheeseBoard = await Board.create({
+            type: 'Mixed Cheeses',
+            describe: 'Best of both worlds',
+            rating: 10
+        })
+
         await User1.addBoard(hardCheeseBoard)
         await User1.addBoard(softCheeseBoard)
+        await User1.addBoard(mixCheeseBoard)
         const getBoards = await User1.getBoards()
         console.log(getBoards)
         console.log(User1)
-
+        
         expect(getBoards[0].type).toEqual(hardCheeseBoard.type)
         expect(getBoards[0].rating).toEqual(9)
         expect(getBoards[1].type).toEqual(softCheeseBoard.type)
         expect(getBoards[1].rating).toEqual(5.8)
+        expect(getBoards[2].type).toEqual(mixCheeseBoard.type)
+        expect(getBoards[2].rating).toEqual(mixCheeseBoard.rating)
     })
 })
 
@@ -132,7 +141,27 @@ describe('A Board can have many cheeses and a cheese can be on many boards', () 
             title: 'Cream Cheese',
             description: ' Frosting Cheese'
         })
-        
+
+        await hardCheeseBoard.addCheese(parmesan)
+        await hardCheeseBoard.addCheese(gruyère)
+        await hardCheeseBoard.addCheese(pecorino)
+        await softCheeseBoard.addCheese(mozzarella)
+        await softCheeseBoard.addCheese(brie)
+        await softCheeseBoard.addCheese(creamCheese)
+         // await mixCheeseBoard.addCheese(mozzarella)
+        //    await mixCheeseBoard.addCheese() use through
+       //     await mixCheeseBoard.addCheese(brie)   {through: 'Board-cheese'}
+
+        const getHardCheeses = await hardCheeseBoard.getCheeses()
+        const getSoftCheeses = await softCheeseBoard.getCheeses()
+        const getMixCheeses = await mixCheeseBoard.getCheeses()
+        // console.log(getHardCheeses)
+        // console.log(getSoftCheeses[2].description)
+        expect(getHardCheeses[0].title).toEqual(parmesan.title)
+        expect(getHardCheeses[1].title).toEqual(gruyère.title)
+        expect (getSoftCheeses[0].title).toEqual(mozzarella.title)
+        expect (getSoftCheeses[0].title).toEqual(mozzarella.title)
+        expect(getSoftCheeses[2].description).toEqual(creamCheese.description)
 
     })
 
